@@ -1,12 +1,13 @@
-# 🛡️ Platform Engineer | Infrastructure Architect
+# 🔐 Network/InfoSec Engineer | Aspiring Platform Engineer
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?logo=linkedin)](https://linkedin.com/in/evanusmodestus)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?logo=linkedin)](https://www.linkedin.com/in/evanjrosado/)
 [![Blog](https://img.shields.io/badge/Blog-Tech%20Writing-FF5722?logo=hashnode)](https://blog.evanusmodestus.dev)
+[![Portfolio](https://img.shields.io/badge/Portfolio-Coming%20Soon-4ECDC4?logo=firefox)](https://domusdigitalis.dev)
 [![GitHub followers](https://img.shields.io/github/followers/EvanusModestus?style=social)](https://github.com/EvanusModestus)
 
 ## 👋 About Me
 
-Platform Engineer specializing in infrastructure automation, cloud architectures, and developer experience optimization. Transitioning from network engineering to cloud-native technologies with a focus on building scalable, secure platforms.
+Network/InfoSec Engineer with deep expertise in Cisco ISE/802.1X, routing/switching, and enterprise security. Passionate about platform engineering, full-stack development, and building elegant knowledge management systems. Currently transitioning toward cloud-native technologies while maintaining strong foundations in network security.
 
 ## 🚀 Current Focus
 
@@ -26,12 +27,12 @@ graph LR
 ## 💼 Professional Experience
 
 ### Core Competencies
-- **Infrastructure as Code**: Terraform, Ansible, CloudFormation
-- **Container Orchestration**: Kubernetes, Docker, Helm
-- **Cloud Platforms**: AWS, Azure, GCP
-- **Network Automation**: Cisco ISE, Python, REST APIs
-- **Security**: Zero Trust, PKI, Compliance Automation
-- **Observability**: Prometheus, Grafana, ELK Stack
+- **Network Engineering**: Cisco ISE/802.1X, Routing & Switching, Network Automation
+- **Security**: Zero Trust, PKI, NAC, Compliance Automation
+- **Infrastructure as Code**: Terraform, Ansible, Python
+- **Full-Stack Development**: JavaScript/TypeScript, React, Node.js
+- **Knowledge Management**: Obsidian, Markdown, PKM Systems
+- **Cloud Platforms**: AWS, Azure (Learning)
 
 ### Technical Stack
 
@@ -56,11 +57,23 @@ graph LR
 
 ## 🔧 Featured Projects
 
+### [Domus Digitalis](https://domusdigitalis.dev) *(Coming Soon)*
+Full-stack web application showcasing portfolio and services
+- Modern design with responsive UI
+- Built with cutting-edge web technologies
+- Professional portfolio and blog platform
+
+### [Knowledge Management System](https://github.com/EvanusModestus/Aethelred-Codex)
+Sophisticated PKM built with Obsidian and Markdown
+- Advanced linking and tagging system
+- Custom workflows for knowledge capture
+- Integration with development tools
+
 ### [Platform Tools](https://github.com/EvanusModestus/platform-tools)
-Production-ready automation utilities for infrastructure management
-- Cloud resource tagging automation
-- SSL certificate monitoring
-- Terraform modules for enterprise deployments
+Network and infrastructure automation utilities
+- Cisco ISE automation scripts
+- Network compliance checking
+- Security audit tools
 
 ### [Dotfiles](https://github.com/EvanusModestus/dotfiles)
 Comprehensive Linux environment configuration
@@ -68,19 +81,13 @@ Comprehensive Linux environment configuration
 - Development environment automation
 - Cross-distribution compatibility
 
-### [Technical Blog](https://github.com/EvanusModestus/tech-blog)
-Technical articles and tutorials on platform engineering
-- Infrastructure as Code best practices
-- Cloud architecture patterns
-- DevOps transformation guides
-
 ## 📚 Recent Blog Posts
 
-- 🏗️ **Building Production-Ready Kubernetes Platforms**
-- 🔄 **From Network Engineer to Platform Engineer: A Transition Guide**
-- 🔧 **Automating Cisco ISE with Python**
-- 🚀 **GitOps: The Path to Declarative Infrastructure**
-- 🔒 **Implementing Zero Trust Architecture in the Cloud**
+- 🔒 **Automating Cisco ISE with Python and REST APIs**
+- 🔄 **From Network Engineer to Platform Engineer: My Journey**
+- 🌐 **802.1X Deep Dive: Enterprise NAC Implementation**
+- 🧠 **Building a Second Brain with Obsidian**
+- 🚀 **Full-Stack Development for Network Engineers**
 
 ## 🎯 2025 Goals
 
@@ -92,21 +99,21 @@ Technical articles and tutorials on platform engineering
 
 ## 🤝 Let's Connect
 
-- 💼 **LinkedIn**: [/in/evanusmodestus](https://linkedin.com/in/evanusmodestus)
+- 💼 **LinkedIn**: [/in/evanjrosado](https://www.linkedin.com/in/evanjrosado/)
 - 📝 **Blog**: [blog.evanusmodestus.dev](https://blog.evanusmodestus.dev)
-- 📧 **Email**: platform@evanusmodestus.dev
-- 🐦 **Twitter**: [@evanusmodestus](https://twitter.com/evanusmodestus)
+- 🌐 **Portfolio**: [domusdigitalis.dev](https://domusdigitalis.dev) *(Coming Soon)*
+- 📧 **Email**: evan.rosado@outlook.com
 
 ## 💡 Philosophy
 
-> "Infrastructure should be invisible to developers, yet powerful enough to scale their ambitions."
+> "The network is the foundation; automation is the evolution; knowledge is the revolution."
 
 ---
 
 <div align="center">
 
-### 🏗️ Building Platforms That Scale
+### 🔐 Network Security | 🚀 Platform Engineering | 💡 Knowledge Systems
 
-**Automate** • **Secure** • **Scale** • **Innovate**
+**Connect** • **Automate** • **Secure** • **Innovate**
 
 </div>
