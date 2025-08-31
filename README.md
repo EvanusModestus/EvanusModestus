@@ -103,6 +103,7 @@ Comprehensive Linux environment configuration
 - 📝 **Blog**: [blog.evanusmodestus.dev](https://blog.evanusmodestus.dev)
 - 🌐 **Portfolio**: [domusdigitalis.dev](https://domusdigitalis.dev) *(Coming Soon)*
 - 📧 **Email**: evan.rosado@outlook.com
+- 🐦 **X (Twitter)**: [@evanusmodestus](https://x.com/evanusmodestus)
 
 ## 💡 Philosophy
 
