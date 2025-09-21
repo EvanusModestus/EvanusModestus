@@ -1,0 +1,370 @@
+/* Portfolio CSS Styling for EvanusModestus AsciiDoc */
+
+/* Base styling with dark theme support */
+:root {
+  --primary-color: #1e3c72;
+  --secondary-color: #2a5298;
+  --accent-color: #ff6b35;
+  --text-color: #333;
+  --text-light: #666;
+  --background-color: #ffffff;
+  --surface-color: #f8f9fa;
+  --border-color: #e1e5e9;
+  --code-background: #f4f4f4;
+  --highlight-color: #fff3cd;
+}
+
+/* Dark theme variables */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-color: #64b5f6;
+    --secondary-color: #42a5f5;
+    --accent-color: #ff8a65;
+    --text-color: #e0e0e0;
+    --text-light: #b0b0b0;
+    --background-color: #1a1a1a;
+    --surface-color: #2d2d2d;
+    --border-color: #404040;
+    --code-background: #2d2d2d;
+    --highlight-color: #3e2723;
+  }
+}
+
+/* Base typography */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+  line-height: 1.6 !important;
+  color: var(--text-color) !important;
+  background-color: var(--background-color) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Headers with gradient accent */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--primary-color) !important;
+  font-weight: 600 !important;
+  margin-top: 2rem !important;
+  margin-bottom: 1rem !important;
+}
+
+h1 {
+  font-size: 2.5rem !important;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+h2 {
+  font-size: 2rem !important;
+  border-bottom: 2px solid var(--primary-color) !important;
+  padding-bottom: 0.5rem !important;
+}
+
+h3 {
+  font-size: 1.5rem !important;
+  color: var(--secondary-color) !important;
+}
+
+/* Table of Contents styling */
+#toc.toc2 {
+  background: var(--surface-color) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 8px !important;
+  padding: 1rem !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+}
+
+#toc.toc2 .toc-title {
+  color: var(--primary-color) !important;
+  font-weight: 600 !important;
+  font-size: 1.1rem !important;
+  margin-bottom: 1rem !important;
+}
+
+#toc.toc2 ul {
+  list-style: none !important;
+  padding-left: 0 !important;
+}
+
+#toc.toc2 li {
+  margin: 0.5rem 0 !important;
+  padding-left: 1rem !important;
+  border-left: 3px solid transparent !important;
+  transition: border-color 0.2s ease !important;
+}
+
+#toc.toc2 li:hover {
+  border-left-color: var(--primary-color) !important;
+}
+
+#toc.toc2 a {
+  color: var(--text-color) !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease !important;
+}
+
+#toc.toc2 a:hover {
+  color: var(--primary-color) !important;
+}
+
+/* Code blocks with syntax highlighting */
+.listingblock .content {
+  background: var(--code-background) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 6px !important;
+  padding: 1.5rem !important;
+  margin: 1rem 0 !important;
+  position: relative !important;
+  overflow-x: auto !important;
+}
+
+.listingblock .title {
+  background: var(--primary-color) !important;
+  color: white !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 6px 6px 0 0 !important;
+  margin: 0 0 -1px 0 !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+}
+
+pre.highlight code {
+  background: transparent !important;
+  color: var(--text-color) !important;
+  font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace !important;
+  font-size: 0.9rem !important;
+  line-height: 1.5 !important;
+}
+
+/* Copy button for code blocks */
+.listingblock .content::before {
+  content: "📋 Copy";
+  position: absolute !important;
+  top: 0.5rem !important;
+  right: 0.5rem !important;
+  background: var(--primary-color) !important;
+  color: white !important;
+  padding: 0.25rem 0.5rem !important;
+  border-radius: 4px !important;
+  font-size: 0.8rem !important;
+  cursor: pointer !important;
+  opacity: 0 !important;
+  transition: opacity 0.2s ease !important;
+}
+
+.listingblock:hover .content::before {
+  opacity: 1 !important;
+}
+
+/* Tables with professional styling */
+table.tableblock {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  margin: 1.5rem 0 !important;
+  background: var(--surface-color) !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+}
+
+table.tableblock th {
+  background: var(--primary-color) !important;
+  color: white !important;
+  padding: 1rem !important;
+  text-align: left !important;
+  font-weight: 600 !important;
+}
+
+table.tableblock td {
+  padding: 0.75rem 1rem !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  color: var(--text-color) !important;
+}
+
+table.tableblock tbody tr:hover {
+  background: rgba(30, 60, 114, 0.05) !important;
+}
+
+/* Quote blocks with accent styling */
+.quoteblock {
+  background: var(--highlight-color) !important;
+  border-left: 4px solid var(--accent-color) !important;
+  padding: 1.5rem !important;
+  margin: 1.5rem 0 !important;
+  border-radius: 0 8px 8px 0 !important;
+  font-style: italic !important;
+}
+
+.quoteblock .attribution {
+  text-align: right !important;
+  margin-top: 1rem !important;
+  font-size: 0.9rem !important;
+  color: var(--text-light) !important;
+}
+
+/* Admonition blocks */
+.admonitionblock {
+  margin: 1.5rem 0 !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+}
+
+.admonitionblock .icon {
+  background: var(--primary-color) !important;
+  color: white !important;
+  padding: 1rem !important;
+  font-weight: bold !important;
+  min-width: 60px !important;
+  text-align: center !important;
+}
+
+.admonitionblock .content {
+  background: var(--surface-color) !important;
+  padding: 1rem !important;
+  color: var(--text-color) !important;
+}
+
+/* Links with hover effects */
+a {
+  color: var(--primary-color) !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease !important;
+}
+
+a:hover {
+  color: var(--secondary-color) !important;
+  text-decoration: underline !important;
+}
+
+/* List styling */
+ul, ol {
+  margin: 1rem 0 !important;
+  padding-left: 2rem !important;
+}
+
+li {
+  margin: 0.5rem 0 !important;
+  color: var(--text-color) !important;
+}
+
+/* Checkbox lists for todo items */
+.ulist .checklist {
+  list-style: none !important;
+  padding-left: 0 !important;
+}
+
+.ulist .checklist li {
+  position: relative !important;
+  padding-left: 2rem !important;
+}
+
+.ulist .checklist li::before {
+  content: "☐" !important;
+  position: absolute !important;
+  left: 0 !important;
+  color: var(--text-light) !important;
+  font-size: 1.2rem !important;
+}
+
+.ulist .checklist li.checked::before {
+  content: "✅" !important;
+  color: var(--primary-color) !important;
+}
+
+/* Professional badge styling */
+.badge {
+  display: inline-block !important;
+  padding: 0.25rem 0.75rem !important;
+  background: var(--primary-color) !important;
+  color: white !important;
+  border-radius: 4px !important;
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  margin: 0.25rem !important;
+}
+
+.badge.secondary {
+  background: var(--secondary-color) !important;
+}
+
+.badge.accent {
+  background: var(--accent-color) !important;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  body.toc2.toc-left {
+    padding-left: 0 !important;
+  }
+
+  #toc.toc2 {
+    position: static !important;
+    width: auto !important;
+    margin-bottom: 2rem !important;
+  }
+
+  h1 {
+    font-size: 2rem !important;
+  }
+
+  h2 {
+    font-size: 1.5rem !important;
+  }
+
+  table.tableblock {
+    font-size: 0.9rem !important;
+  }
+
+  table.tableblock th,
+  table.tableblock td {
+    padding: 0.5rem !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  #toc.toc2 {
+    border: 1px solid #ccc !important;
+    background: #f9f9f9 !important;
+  }
+
+  .listingblock .content {
+    background: #f4f4f4 !important;
+    border: 1px solid #ccc !important;
+  }
+
+  a {
+    color: black !important;
+    text-decoration: underline !important;
+  }
+}
+
+/* Performance optimizations */
+* {
+  box-sizing: border-box !important;
+}
+
+img {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth !important;
+}
+
+/* Focus indicators for accessibility */
+a:focus,
+button:focus {
+  outline: 2px solid var(--primary-color) !important;
+  outline-offset: 2px !important;
+}

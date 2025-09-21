@@ -1,0 +1,488 @@
+= Domus Digitalis: Full-Stack Portfolio Platform
+:author: Evan Rosado
+:email: evan.rosado@outlook.com
+:revdate: 2025-01-20
+:doctype: article
+:toc: left
+:toclevels: 3
+:numbered:
+:icons: font
+:source-highlighter: rouge
+
+== Project Overview
+
+Domus Digitalis is a comprehensive full-stack web application serving as a professional portfolio and service platform. Built with modern web technologies and applying network engineering principles to software architecture, this platform showcases the intersection of infrastructure expertise and software development.
+
+=== Project Scope
+
+* **Type**: Full-stack web application
+* **Purpose**: Professional portfolio, blog platform, service showcase
+* **Target Audience**: Potential clients, employers, technical community
+* **Status**: Active development
+* **Timeline**: Q1-Q2 2025 launch
+
+=== Technical Architecture
+
+[cols="2,3,3", options="header"]
+|===
+|Layer |Technology |Purpose
+
+|Frontend
+|Next.js 14, React 18, TypeScript
+|Server-side rendering, component architecture, type safety
+
+|Backend
+|Node.js, Express, PostgreSQL
+|API development, data persistence, business logic
+
+|Infrastructure
+|Docker, AWS/Vercel, GitHub Actions
+|Containerization, deployment, CI/CD automation
+
+|Caching
+|Redis, CDN
+|Performance optimization, session management
+
+|Monitoring
+|Analytics, Error tracking
+|Performance monitoring, user insights
+|===
+
+== Technical Implementation
+
+=== Frontend Architecture
+
+[source,typescript]
+----
+// Network engineer's approach to React state management
+interface ConnectionState {
+  status: 'connecting' | 'connected' | 'disconnected' | 'error';
+  latency: number;
+  retryCount: number;
+  lastError?: string;
+}
+
+class ConnectionManager {
+  private retryPolicy = {
+    maxRetries: 3,
+    backoffMs: [1000, 2000, 4000], // Exponential backoff
+    timeoutMs: 5000
+  };
+
+  async establishConnection(endpoint: string): Promise<ConnectionState> {
+    // Network thinking applied to API connections
+    for (let attempt = 0; attempt < this.retryPolicy.maxRetries; attempt++) {
+      try {
+        const startTime = Date.now();
+        const response = await this.makeRequest(endpoint);
+        const latency = Date.now() - startTime;
+
+        return {
+          status: 'connected',
+          latency,
+          retryCount: attempt
+        };
+      } catch (error) {
+        if (attempt < this.retryPolicy.maxRetries - 1) {
+          await this.delay(this.retryPolicy.backoffMs[attempt]);
+        } else {
+          return {
+            status: 'error',
+            latency: 0,
+            retryCount: attempt + 1,
+            lastError: error.message
+          };
+        }
+      }
+    }
+  }
+}
+----
+
+=== Database Design
+
+[source,sql]
+----
+-- Portfolio content management schema
+CREATE TABLE portfolio_projects (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    slug VARCHAR(100) UNIQUE NOT NULL,
+    description TEXT,
+    tech_stack JSONB,
+    project_status VARCHAR(50),
+    github_url VARCHAR(255),
+    demo_url VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    -- Full-text search optimization
+    search_vector tsvector GENERATED ALWAYS AS (
+        to_tsvector('english', title || ' ' || COALESCE(description, ''))
+    ) STORED
+);
+
+-- Index for performance
+CREATE INDEX idx_portfolio_search ON portfolio_projects
+    USING GIN (search_vector);
+
+CREATE INDEX idx_portfolio_status ON portfolio_projects(project_status);
+----
+
+=== API Architecture
+
+[source,javascript]
+----
+// RESTful API with network engineering error handling
+const express = require('express');
+const rateLimit = require('express-rate-limit');
+
+// Rate limiting (network QoS applied to APIs)
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  message: 'Too many requests from this IP',
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+// Circuit breaker pattern for external services
+class CircuitBreaker {
+  constructor(threshold = 5, timeout = 60000) {
+    this.failureThreshold = threshold;
+    this.timeout = timeout;
+    this.failureCount = 0;
+    this.lastFailureTime = null;
+    this.state = 'CLOSED'; // CLOSED, OPEN, HALF_OPEN
+  }
+
+  async call(fn) {
+    if (this.state === 'OPEN') {
+      if (Date.now() - this.lastFailureTime > this.timeout) {
+        this.state = 'HALF_OPEN';
+      } else {
+        throw new Error('Circuit breaker is OPEN');
+      }
+    }
+
+    try {
+      const result = await fn();
+      this.onSuccess();
+      return result;
+    } catch (error) {
+      this.onFailure();
+      throw error;
+    }
+  }
+
+  onSuccess() {
+    this.failureCount = 0;
+    this.state = 'CLOSED';
+  }
+
+  onFailure() {
+    this.failureCount++;
+    this.lastFailureTime = Date.now();
+
+    if (this.failureCount >= this.failureThreshold) {
+      this.state = 'OPEN';
+    }
+  }
+}
+----
+
+== Features & Functionality
+
+=== Core Features
+
+. **Portfolio Showcase**
+   * Project galleries with detailed technical breakdowns
+   * GitHub integration for live repository data
+   * Technology stack visualization
+
+. **Technical Blog**
+   * AsciiDoc-powered blog engine
+   * Syntax highlighting for code examples
+   * Technical article categorization
+
+. **Professional Services**
+   * Consulting service descriptions
+   * Contact forms with validation
+   * Project inquiry system
+
+. **Performance Monitoring**
+   * Real-time analytics
+   * Performance metrics dashboard
+   * Error tracking and alerting
+
+=== Advanced Features
+
+==== Content Management
+
+[source,javascript]
+----
+// Dynamic content loading with caching
+class ContentManager {
+  constructor() {
+    this.cache = new Map();
+    this.cacheTimeout = 5 * 60 * 1000; // 5 minutes
+  }
+
+  async getProjectData(slug) {
+    const cacheKey = `project:${slug}`;
+    const cached = this.cache.get(cacheKey);
+
+    if (cached && Date.now() - cached.timestamp < this.cacheTimeout) {
+      return cached.data;
+    }
+
+    const data = await this.fetchFromDatabase(slug);
+    this.cache.set(cacheKey, {
+      data,
+      timestamp: Date.now()
+    });
+
+    return data;
+  }
+}
+----
+
+==== Search Functionality
+
+[source,sql]
+----
+-- Advanced search with ranking
+SELECT
+    title,
+    description,
+    tech_stack,
+    ts_rank(search_vector, plainto_tsquery('english', $1)) as relevance
+FROM portfolio_projects
+WHERE search_vector @@ plainto_tsquery('english', $1)
+ORDER BY relevance DESC, created_at DESC
+LIMIT 20;
+----
+
+== Development Workflow
+
+=== Local Development Setup
+
+[source,bash]
+----
+#!/bin/bash
+# Development environment setup
+
+# Install dependencies
+npm install
+
+# Setup environment variables
+cp .env.example .env.local
+
+# Initialize database
+npm run db:setup
+npm run db:migrate
+npm run db:seed
+
+# Start development servers
+npm run dev:all  # Starts both frontend and backend
+----
+
+=== CI/CD Pipeline
+
+[source,yaml]
+----
+name: Deploy Domus Digitalis
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - run: npm ci
+      - run: npm run test:unit
+      - run: npm run test:integration
+      - run: npm run build
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy to production
+        run: |
+          # Deployment logic here
+          echo "Deploying to production..."
+----
+
+== Performance Optimization
+
+=== Frontend Performance
+
+* **Code Splitting**: Route-based and component-based splitting
+* **Image Optimization**: Next.js Image component with automatic optimization
+* **Caching Strategy**: Service worker implementation for offline functionality
+* **Bundle Analysis**: Regular bundle size monitoring and optimization
+
+=== Backend Performance
+
+* **Database Optimization**: Query optimization, proper indexing
+* **Caching Layers**: Redis for session management and frequent queries
+* **Connection Pooling**: Efficient database connection management
+* **Load Balancing**: Prepared for horizontal scaling
+
+== Security Implementation
+
+=== Authentication & Authorization
+
+[source,javascript]
+----
+// JWT-based authentication with refresh tokens
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+
+class AuthService {
+  generateTokens(user) {
+    const accessToken = jwt.sign(
+      { userId: user.id, email: user.email },
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: '15m' }
+    );
+
+    const refreshToken = jwt.sign(
+      { userId: user.id },
+      process.env.REFRESH_TOKEN_SECRET,
+      { expiresIn: '7d' }
+    );
+
+    return { accessToken, refreshToken };
+  }
+
+  async validatePassword(plaintext, hash) {
+    return await bcrypt.compare(plaintext, hash);
+  }
+}
+----
+
+=== Security Headers
+
+[source,javascript]
+----
+// Security middleware configuration
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      scriptSrc: ["'self'"],
+      imgSrc: ["'self'", "data:", "https:"],
+    },
+  },
+  hsts: {
+    maxAge: 31536000,
+    includeSubDomains: true,
+    preload: true
+  }
+}));
+----
+
+== Deployment Architecture
+
+=== Infrastructure as Code
+
+[source,terraform]
+----
+# AWS infrastructure for Domus Digitalis
+resource "aws_ecs_cluster" "domus_digitalis" {
+  name = "domus-digitalis-cluster"
+
+  setting {
+    name  = "containerInsights"
+    value = "enabled"
+  }
+}
+
+resource "aws_ecs_service" "web_app" {
+  name            = "domus-digitalis-web"
+  cluster         = aws_ecs_cluster.domus_digitalis.id
+  task_definition = aws_ecs_task_definition.web_app.arn
+  desired_count   = 2
+
+  load_balancer {
+    target_group_arn = aws_lb_target_group.web_app.arn
+    container_name   = "web-app"
+    container_port   = 3000
+  }
+}
+----
+
+=== Monitoring & Observability
+
+* **Application Monitoring**: Custom metrics and alerting
+* **Log Aggregation**: Centralized logging with structured data
+* **Performance Tracking**: Real-time performance monitoring
+* **Error Reporting**: Automated error detection and notification
+
+== Project Timeline
+
+[cols="1,2,3", options="header"]
+|===
+|Phase |Duration |Deliverables
+
+|Phase 1 - Foundation
+|January 2025
+|• Basic frontend structure +
+• Database schema +
+• Authentication system
+
+|Phase 2 - Core Features
+|February 2025
+|• Portfolio showcase +
+• Blog functionality +
+• Contact forms
+
+|Phase 3 - Advanced Features
+|March 2025
+|• Search implementation +
+• Performance optimization +
+• Security hardening
+
+|Phase 4 - Launch
+|April 2025
+|• Production deployment +
+• Monitoring setup +
+• Performance tuning
+|===
+
+== Lessons Learned
+
+=== Network Engineering Principles in Software
+
+* **Redundancy**: Implemented at multiple levels (database, application, infrastructure)
+* **Monitoring**: Comprehensive observability from day one
+* **Performance**: Measured and optimized systematically
+* **Security**: Built into every layer, not added as an afterthought
+
+=== Technical Insights
+
+* **State Management**: Network connection principles apply to React state management
+* **Error Handling**: Circuit breaker patterns improve user experience
+* **Caching**: Multi-layer caching strategy similar to network QoS
+* **Monitoring**: Infrastructure monitoring principles scale to application monitoring
+
+---
+
+*Project Repository*: Private (Launch Pending) +
+*Live Demo*: https://domusdigitalis.dev (Coming Soon) +
+*Technologies*: Next.js, React, PostgreSQL, Redis, AWS
