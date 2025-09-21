@@ -1,0 +1,192 @@
+name: Build and Deploy Portfolio
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, master ]
+    paths:
+      - '**.adoc'
+      - 'assets/**'
+      - '.github/workflows/**'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: true
+
+      - name: Install AsciiDoctor
+        run: |
+          gem install asciidoctor
+          gem install rouge
+          asciidoctor --version
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Create output directory
+        run: mkdir -p _site
+
+      - name: Convert AsciiDoc files to HTML
+        run: |
+          # Convert main index
+          asciidoctor \
+            -a toc=left \
+            -a toclevels=3 \
+            -a numbered \
+            -a icons=font \
+            -a source-highlighter=rouge \
+            -a stylesheet=assets/css/portfolio.css \
+            -a linkcss \
+            -D _site \
+            index.adoc
+
+          # Convert project files
+          find 01_PROJECTS -name "*.adoc" -exec asciidoctor \
+            -a toc=left \
+            -a toclevels=3 \
+            -a numbered \
+            -a icons=font \
+            -a source-highlighter=rouge \
+            -a stylesheet=../assets/css/portfolio.css \
+            -a linkcss \
+            -D _site/01_PROJECTS \
+            {} \;
+
+          # Convert writing files
+          find 02_WRITING -name "*.adoc" -exec asciidoctor \
+            -a toc=left \
+            -a toclevels=3 \
+            -a numbered \
+            -a icons=font \
+            -a source-highlighter=rouge \
+            -a stylesheet=../assets/css/portfolio.css \
+            -a linkcss \
+            -D _site/02_WRITING \
+            {} \;
+
+          # Convert experience files (if any)
+          if [ -d "03_EXPERIENCE" ]; then
+            find 03_EXPERIENCE -name "*.adoc" -exec asciidoctor \
+              -a toc=left \
+              -a toclevels=3 \
+              -a numbered \
+              -a icons=font \
+              -a source-highlighter=rouge \
+              -a stylesheet=../assets/css/portfolio.css \
+              -a linkcss \
+              -D _site/03_EXPERIENCE \
+              {} \;
+          fi
+
+      - name: Copy assets
+        run: |
+          cp -r assets _site/
+
+          # Ensure CSS is available at root level too
+          cp assets/css/portfolio.css _site/
+
+      - name: Add code copy functionality
+        run: |
+          cat > _site/code-copy.js << 'EOF'
+          document.addEventListener('DOMContentLoaded', function() {
+              // Add copy buttons to code blocks
+              const codeBlocks = document.querySelectorAll('.listingblock .content');
+
+              codeBlocks.forEach(function(block) {
+                  const button = document.createElement('button');
+                  button.className = 'copy-button';
+                  button.innerHTML = '📋 Copy';
+                  button.style.position = 'absolute';
+                  button.style.top = '0.5rem';
+                  button.style.right = '0.5rem';
+                  button.style.background = '#1e3c72';
+                  button.style.color = 'white';
+                  button.style.border = 'none';
+                  button.style.padding = '0.25rem 0.5rem';
+                  button.style.borderRadius = '4px';
+                  button.style.fontSize = '0.8rem';
+                  button.style.cursor = 'pointer';
+                  button.style.opacity = '0';
+                  button.style.transition = 'opacity 0.2s ease';
+
+                  block.style.position = 'relative';
+                  block.appendChild(button);
+
+                  // Show button on hover
+                  block.addEventListener('mouseenter', function() {
+                      button.style.opacity = '1';
+                  });
+
+                  block.addEventListener('mouseleave', function() {
+                      button.style.opacity = '0';
+                  });
+
+                  // Copy functionality
+                  button.addEventListener('click', function() {
+                      const code = block.querySelector('pre code, pre').textContent;
+                      navigator.clipboard.writeText(code).then(function() {
+                          button.innerHTML = '✅ Copied!';
+                          setTimeout(function() {
+                              button.innerHTML = '📋 Copy';
+                          }, 2000);
+                      }).catch(function() {
+                          button.innerHTML = '❌ Failed';
+                          setTimeout(function() {
+                              button.innerHTML = '📋 Copy';
+                          }, 2000);
+                      });
+                  });
+              });
+          });
+          EOF
+
+      - name: Add JavaScript to HTML files
+        run: |
+          # Add the copy script to all HTML files
+          find _site -name "*.html" -exec sed -i 's|</head>|<script src="/code-copy.js"></script>\n</head>|' {} \;
+
+      - name: Create sitemap
+        run: |
+          cat > _site/sitemap.xml << EOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+            <url>
+              <loc>https://evanusmodestus.github.io/</loc>
+              <lastmod>$(date -u +%Y-%m-%d)</lastmod>
+              <changefreq>weekly</changefreq>
+              <priority>1.0</priority>
+            </url>
+          $(find _site -name "*.html" | grep -v index.html | sed 's|_site/||' | sed 's|\.html||' | awk '{print "  <url>\n    <loc>https://evanusmodestus.github.io/" $1 ".html</loc>\n    <lastmod>$(date -u +%Y-%m-%d)</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n  </url>"}')
+          </urlset>
+          EOF
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,120 +1,174 @@
-# 🔐 Network/InfoSec Engineer | Aspiring Platform Engineer
+# Evan Rosado - Professional Portfolio
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?logo=linkedin)](https://www.linkedin.com/in/evanjrosado/)
-[![Blog](https://img.shields.io/badge/Blog-Tech%20Writing-FF5722?logo=hashnode)](https://blog.evanusmodestus.dev)
-[![Portfolio](https://img.shields.io/badge/Portfolio-Coming%20Soon-4ECDC4?logo=firefox)](https://domusdigitalis.dev)
-[![GitHub followers](https://img.shields.io/github/followers/EvanusModestus?style=social)](https://github.com/EvanusModestus)
+This repository contains my professional portfolio showcasing expertise in network security engineering, platform engineering, and full-stack development.
 
-## 👋 About Me
+## 🌐 Live Portfolio
 
-Network/InfoSec Engineer with deep expertise in Cisco ISE/802.1X, routing/switching, and enterprise security. Passionate about platform engineering, full-stack development, and building elegant knowledge management systems. Currently transitioning toward cloud-native technologies while maintaining strong foundations in network security.
+Visit the live portfolio at: **[evanusmodestus.github.io](https://evanusmodestus.github.io)**
 
-## 🚀 Current Focus
+## 📁 Repository Structure
 
-```mermaid
-graph LR
-    A[Platform Engineering] --> B[Infrastructure as Code]
-    A --> C[Kubernetes]
-    A --> D[DevOps Automation]
-    B --> E[Terraform]
-    B --> F[Ansible]
-    C --> G[Helm]
-    C --> H[GitOps]
-    D --> I[CI/CD]
-    D --> J[Python]
+```
+├── index.adoc                    # Main portfolio page
+├── 01_PROJECTS/                  # Featured projects
+│   ├── 2025-PROJ-WEB-001-domus-digitalis.adoc
+│   ├── 2025-PROJ-NET-001-ise-automation-suite.adoc
+│   └── ...
+├── 02_WRITING/                   # Technical articles
+│   ├── 2025-WRITE-ISE-001-nine-years-experience.adoc
+│   └── ...
+├── 03_EXPERIENCE/                # Professional experience details
+├── assets/                       # CSS, images, and other assets
+│   ├── css/portfolio.css
+│   └── images/
+└── .github/workflows/            # GitHub Actions for automated publishing
+    └── publish-portfolio.yml
 ```
 
-## 💼 Professional Experience
+## 🛠 Technology Stack
 
-### Core Competencies
-- **Network Engineering**: Cisco ISE/802.1X, Routing & Switching, Network Automation
-- **Security**: Zero Trust, PKI, NAC, Compliance Automation
-- **Infrastructure as Code**: Terraform, Ansible, Python
-- **Full-Stack Development**: JavaScript/TypeScript, React, Node.js
-- **Knowledge Management**: Obsidian, Markdown, PKM Systems
-- **Cloud Platforms**: AWS, Azure (Learning)
+- **Content Format**: AsciiDoc for rich technical documentation
+- **Styling**: Custom CSS with dark mode support
+- **Build System**: GitHub Actions with AsciiDoctor
+- **Hosting**: GitHub Pages
+- **Features**: Code copy functionality, responsive design, professional styling
 
-### Technical Stack
+## 🚀 Key Features
 
-| Category | Technologies |
-|----------|-------------|
-| **Languages** | Python, Go, Bash, JavaScript/TypeScript |
-| **IaC** | Terraform, Ansible, Pulumi |
-| **Containers** | Docker, Kubernetes, OpenShift |
-| **CI/CD** | GitHub Actions, GitLab CI, Jenkins |
-| **Cloud** | AWS, Azure, GCP |
-| **Monitoring** | Prometheus, Grafana, Datadog |
+### Professional Content
+- **9+ years of Cisco ISE experience** with production insights
+- **Full-stack development projects** with real-world implementation details
+- **Network automation expertise** with Python and infrastructure as code
+- **Technical writing** covering enterprise security and platform engineering
 
-## 📊 GitHub Stats
+### Technical Implementation
+- **AsciiDoc-powered**: Rich documentation with code syntax highlighting
+- **Responsive Design**: Professional appearance across all devices
+- **Code Copy Functionality**: Interactive code blocks with copy-to-clipboard
+- **Dark Mode Support**: Automatic theme detection and switching
+- **Performance Optimized**: Fast loading with efficient CSS and minimal JavaScript
 
-<div align="center">
-  
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=EvanusModestus&show_icons=true&theme=dark)
+## 📖 Content Highlights
 
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=EvanusModestus&layout=compact&theme=dark)
+### Featured Projects
 
-</div>
+1. **[Domus Digitalis](01_PROJECTS/2025-PROJ-WEB-001-domus-digitalis.adoc)** - Full-stack portfolio platform
+2. **[ISE Automation Suite](01_PROJECTS/2025-PROJ-NET-001-ise-automation-suite.adoc)** - Enterprise network access control automation
+3. **Knowledge Management System** - Sophisticated personal knowledge management
+4. **Development Environment** - Cross-platform dotfiles and automation
 
-## 🔧 Featured Projects
+### Technical Writing
 
-### [Domus Digitalis](https://domusdigitalis.dev) *(Coming Soon)*
-Full-stack web application showcasing portfolio and services
-- Modern design with responsive UI
-- Built with cutting-edge web technologies
-- Professional portfolio and blog platform
+- **Nine Years of Cisco ISE**: Production insights and automation strategies
+- **Network to Full-Stack Journey**: Transitioning from network engineering to development
+- **Enterprise Automation**: Python-based network infrastructure automation
+- **Platform Engineering**: Modern DevOps and infrastructure practices
 
-### [Knowledge Management System](https://github.com/EvanusModestus/Aethelred-Codex)
-Sophisticated PKM built with Obsidian and Markdown
-- Advanced linking and tagging system
-- Custom workflows for knowledge capture
-- Integration with development tools
+## 🔧 Local Development
 
-### [Platform Tools](https://github.com/EvanusModestus/platform-tools)
-Network and infrastructure automation utilities
-- Cisco ISE automation scripts
-- Network compliance checking
-- Security audit tools
+### Prerequisites
 
-### [Dotfiles](https://github.com/EvanusModestus/dotfiles)
-Comprehensive Linux environment configuration
-- Neovim power-user setup
-- Development environment automation
-- Cross-distribution compatibility
+- Ruby with AsciiDoctor gem
+- Modern web browser for testing
 
-## 📚 Recent Blog Posts
+### Setup
 
-- 🔒 **Automating Cisco ISE with Python and REST APIs**
-- 🔄 **From Network Engineer to Platform Engineer: My Journey**
-- 🌐 **802.1X Deep Dive: Enterprise NAC Implementation**
-- 🧠 **Building a Second Brain with Obsidian**
-- 🚀 **Full-Stack Development for Network Engineers**
+```bash
+# Clone the repository
+git clone https://github.com/EvanusModestus/EvanusModestus.git
+cd EvanusModestus
 
-## 🎯 2025 Goals
+# Install AsciiDoctor
+gem install asciidoctor rouge
 
-- [ ] Complete CKA (Certified Kubernetes Administrator)
-- [ ] Contribute to 5 open-source projects
-- [ ] Publish 52 technical articles
-- [ ] Build enterprise-grade platform tools
-- [ ] Master Go for cloud-native development
+# Build the site locally
+mkdir -p _site
 
-## 🤝 Let's Connect
+# Convert main page
+asciidoctor \
+  -a toc=left \
+  -a toclevels=3 \
+  -a numbered \
+  -a icons=font \
+  -a source-highlighter=rouge \
+  -a stylesheet=assets/css/portfolio.css \
+  -a linkcss \
+  -D _site \
+  index.adoc
 
-- 💼 **LinkedIn**: [/in/evanjrosado](https://www.linkedin.com/in/evanjrosado/)
-- 📝 **Blog**: [blog.evanusmodestus.dev](https://blog.evanusmodestus.dev)
-- 🌐 **Portfolio**: [domusdigitalis.dev](https://domusdigitalis.dev) *(Coming Soon)*
-- 📧 **Email**: evan.rosado@outlook.com
-- 🐦 **X (Twitter)**: [@evanusmodestus](https://x.com/evanusmodestus)
+# Copy assets
+cp -r assets _site/
 
-## 💡 Philosophy
+# Serve locally (Python 3)
+cd _site && python -m http.server 8000
+```
 
-> "The network is the foundation; automation is the evolution; knowledge is the revolution."
+Visit `http://localhost:8000` to view the portfolio locally.
+
+## 📝 Content Guidelines
+
+### File Naming Convention
+
+All content follows an ID-based naming structure:
+
+```
+YYYY-CATEGORY-TYPE-###-description.adoc
+
+Where:
+- YYYY = Year
+- CATEGORY = PROJ (Projects), WRITE (Writing), EXP (Experience)
+- TYPE = Technology/focus area (WEB, NET, DEV, SYS, etc.)
+- ### = Sequential number
+- description = Brief descriptive name
+```
+
+### AsciiDoc Standards
+
+- Use semantic markup for better accessibility
+- Include table of contents for articles longer than 500 words
+- Add source highlighting for all code blocks
+- Maintain consistent heading hierarchy
+- Include author metadata and revision dates
+
+## 🚀 Deployment
+
+The portfolio automatically builds and deploys via GitHub Actions when:
+
+1. **Manual trigger**: Using the workflow dispatch button
+2. **Automatic**: On push to main/master branch when AsciiDoc files change
+
+### Deployment Process
+
+1. Checkout repository
+2. Install Ruby and AsciiDoctor
+3. Convert all AsciiDoc files to HTML
+4. Apply custom CSS styling
+5. Add interactive JavaScript features
+6. Deploy to GitHub Pages
+
+## 🎯 Performance Features
+
+- **Minimal Dependencies**: Only AsciiDoctor for building
+- **Optimized CSS**: Single stylesheet with efficient selectors
+- **Progressive Enhancement**: Core content works without JavaScript
+- **Responsive Design**: Mobile-first approach with desktop enhancements
+- **Fast Loading**: Optimized images and minimal resource usage
+
+## 🔗 Professional Links
+
+- **LinkedIn**: [/in/evanjrosado](https://www.linkedin.com/in/evanjrosado/)
+- **Email**: evan.rosado@outlook.com
+- **Blog**: [blog.evanusmodestus.dev](https://blog.evanusmodestus.dev)
+- **Portfolio**: [domusdigitalis.dev](https://domusdigitalis.dev) *(Coming Soon)*
+
+## 📄 License
+
+This portfolio content is © 2025 Evan Rosado. All rights reserved.
+
+The CSS framework and build system are available under MIT license for educational purposes.
 
 ---
 
-<div align="center">
+**Connect • Automate • Secure • Innovate**
 
-### 🔐 Network Security | 🚀 Platform Engineering | 💡 Knowledge Systems
-
-**Connect** • **Automate** • **Secure** • **Innovate**
-
-</div>
+*Professional Portfolio | Network Security Engineer | Aspiring Platform Engineer*

@@ -1,0 +1,30 @@
+# Build output
+_site/
+*.html
+!index.html
+
+# Backup files
+*.bak
+*~
+.*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+
+# Dependencies
+node_modules/
+vendor/
+
+# Logs
+*.log
+
+# Temporary files
+tmp/
+temp/
+*.tmp
